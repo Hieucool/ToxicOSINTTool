@@ -1,0 +1,51 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Chi tiết bài báo {% endblock %}
+{% block body %}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Chi tiết bài báo</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/admin/managernews">Tất cả các tin</a></li>
+            <li class="breadcrumb-item active">Chi tiết bài báo</li>
+        </ol>
+        
+        
+        
+    {%if data %}
+        <div class="mt-4">
+            <h3> {{data['title']}}</h3>
+            <div class="card">
+                <div class="card-body" id="">
+                    <div id="responseData">
+                        <h4 >* Là FakeNews : {{data['is_fake']}} </h4>
+                    </div>
+                    <h4>* Thời gian đăng :</h4>{{data['created_at']}}
+                    <h4>* URL:</h4>{{data['url']}}
+                    <h4>* Keywords:</h4>{{keywords}}
+                    <h4>* Nội dung tóm tắt:</h4>{{data['summerize']}}
+                    <h4>* Nội dung :</h4>{{data['content']}}
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</main>
+
+<script>
+    var responseData = {data};
+    if (responseData && responseData["is_fake"] == True) {
+        document.getElementById('responseData').classList.add('bg-danger');
+    }else{
+        document.getElementById('responseData').classList.add('bg-success');
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.12/signalr.min.js"></script>
+<script src="/Admin/js/site.js"></script>
+
+
+{% endblock %}

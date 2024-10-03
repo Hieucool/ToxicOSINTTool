@@ -1,0 +1,67 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Danh sách tin tức {% endblock %}
+{% block body %}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh sách tin tức</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/admin/search">Trang tìm kiếm</a></li>
+            <li class="breadcrumb-item active">Danh sách tin tức</li>
+        </ol>
+        
+
+        
+        <div class="mt-4">
+         <h3> Danh sách tin theo từ khóa "{{keyword}}" : {{soketqua}}  bài báo </h3>
+            <p> {{scores}} </p>
+            {%if data %}
+            <div class="card">
+                <div class="card-body" id="responseData">
+        
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tiêu đề</th>
+                            <th scope="col">URL</th>
+                            <th scope="col">Nội dung</th>
+                           
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in data %}
+                                <tr>
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.title}}</td>
+                                    <td><a href="{{item.url}}">{{item.url}}</td>
+                                    <td>{{item.summerize}} ...</td>
+                                    
+                                   
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                   
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.com/libraries/bootstrap-datetimepicker/4.17.37" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+
+
+<script src="{{url_for('static',filename='/Admin/js/scripts.js')}}"></script>
+<script src="{{url_for('static',filename='/Admin/js/datatables-simple.js')}}"></script>
+
+
+
+
+{% endblock %}

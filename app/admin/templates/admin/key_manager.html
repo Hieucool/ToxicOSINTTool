@@ -1,0 +1,70 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Quản lý Từ khóa {% endblock %}
+{% block body %}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Quản lý Từ khóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Quản lý Từ khóa</li>
+        </ol>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form id="keywordForm" action="/admin/add_keyword" method="post" style="margin-top: 100px;">
+                        <div class="input-group mb-3">
+                            <input type="text" id="newKeyword" name="newKeyword" class="form-control" placeholder="Thêm mới một từ khóa" required style="border-radius: 50;">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 50;">Thêm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                Danh sách từ khóa
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Từ khóa
+            </div>
+            <div class="card-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên từ khóa</th>
+                            <th scope="col">Số bài báo</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in listKeywords %}
+                            <tr>
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.num_art}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/edit_keyword/{{item.keyword_id}}'">Chỉnh sửa</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location.href='/admin/delete_keyword/{{item.keyword_id}}'">Xóa</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="{{url_for('static',filename='/Admin/js/scripts.js')}}"></script>
+<script src="{{url_for('static',filename='/Admin/js/datatables-simple.js')}}"></script>
+
+{% endblock %}

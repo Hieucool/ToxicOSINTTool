@@ -1,0 +1,93 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Trinh sát báo Việt tân {% endblock %}
+{% block body %}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Trinh sát báo Việt tân</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/admin">Trinh sát tin tức</a></li>
+            <li class="breadcrumb-item"><a href="/admin/unofficalnews">Nguồn không chính thống</a></li>
+            <li class="breadcrumb-item active">Trinh sát báo Việt tân</li>
+        </ol>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <h3 class="mt-4">Lọc theo thời gian</h3>
+                <div class="col-md-6">
+                    <form id="classificationForm" action="/admin/viettanosint" method="post" style="margin-top: 20px;">
+                        
+                            <select name="dateop" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="day" selected>Hôm nay</option>
+                                <option value="thismonth">Tháng này</option>
+                                <option value="premonth">Tháng trước</option>
+                                <option value="year">Năm nay</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" style="border-radius: 50;">Thu thập </button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                Danh sách danh mục</a>
+                .
+            </div>
+        </div>
+
+
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Danh mục
+            </div>
+            <div class="card-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tiêu đề</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Ảnh nổi bật</th>
+                        <th scope="col">Nội dung</th>
+                        <th scope="col">Tóm tắt</th>
+                        <th scope="col">Thời gian</th>
+                        <th scope="col">Là FakeNews?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in listNews %}
+                            <tr>
+                                <td>{{item.id}}</td>
+                                <td><a href="/admin/article/{{item.id}}">{{item.title}}</a></td>
+                                <td><a href={{item.url}} >{{item.url}}</a></td>
+                                <td><img src={{item.image_url}} style="width:90%;height:90%;"> </td>
+                                <td>{{item.content[:200]}} ...</td>
+                                <td>{{item.summerize[:100]}}</td>
+                                <td>{{item.created_at}}</td>
+                                <td>{{item.is_fake}}</td>
+                               
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+    crossorigin="anonymous"></script>
+
+<script src="{{url_for('static',filename='/Admin/js/scripts.js')}}"></script>
+<script src="{{url_for('static',filename='/Admin/js/datatables-simple.js')}}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{appName}} {% block title %}{% endblock %}</title>
+
+	<link href="{{url_for('static',filename='lib/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet" id="bootstrap-css">
+	<script src="{{url_for('static',filename='lib/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{url_for('static',filename='js/site.js')}}"></script>
+	<script src="{{url_for('static',filename='lib/jquery/dist/jquery.min.js')}}"></script>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/" ><img src="{{url_for('static',filename='/Admin/assets/img/logo.svg')}}" style="height: 40px;margin-left: 25px" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/" >Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/about" >About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/admin" >Dashboard</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+           {% block body %}{% endblock %}
+        </main>
+    </div>
+    <div style="height: 100px;"></div>
+
+    <footer class="fixed-bottom bg-light text-center p-3">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; News Classifier</div>
+                <div>
+                    <a href="/Home/About">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    
+
+
+</body>
+</html>

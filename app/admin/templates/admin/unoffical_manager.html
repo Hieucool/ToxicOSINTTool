@@ -1,0 +1,123 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Theo dõi nguồn tin không chính thống {% endblock %}
+{% block body %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Theo dõi nguồn tin không chính thống</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Theo dõi bbc.news tiếng việt</li>
+        </ol>
+        
+        <div class="row">
+
+         
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- <div class="float-right">
+                                                <select class="custom-select">
+                                                    <option selected>Today</option>
+                                                    <option value="1">Weekly</option>
+                                                    <option value="2">Monthly</option>
+                                                    <option value="3">Yearly</option>
+                                                </select>
+                                            </div> -->
+                        <h5 class="mb-0"> Top Từ thông dụng trên bbc.news</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <script>
+                                var wordlabels = {{ data['label'] | tojson }};
+                                var wordcounts = {{ data['count'] | tojson }};
+                                var max_value = {{ data['max'] | tojson }} + 100;
+                                
+                            </script>
+                            <canvas id="categoryChartBar" width="400" height="200"></canvas>
+
+                            <!-- <div class="card-footer small text-muted">Updated in realtime</div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                    
+                        <h5 class="mb-0"> Word cloud của bbc.news</h5>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img src="{{linkimg}}" class="card-img-top" alt="...">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Mới cập nhật gần đây</h5>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tiêu đề</th>
+                                    <th scope="col">URL</th>
+                                    <th scope="col">Ảnh nổi bật</th>
+                                    <th scope="col">Nội dung</th>
+                                    <th scope="col">Tóm tắt</th>
+                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Là FakeNews?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in listNews %}
+                                <tr>
+                                    <td>{{item.id}}</td>
+                                    <td><a href="/admin/article/{{item.id}}">{{item.title}}</a></td>
+                                    <td><a href={{item.url}}>{{item.url}}</a></td>
+                                    <td><img src={{item.image_url}} style="width:90%;height:90%;"> </td>
+                                    <td>{{item.content[:200]}} ...</td>
+                                    <td>{{item.summerize[:100]}}</td>
+                                    <td>{{item.created_at}}</td>
+                                    <td>{{item.is_fake}}</td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+       
+
+       
+
+    
+        </div>
+    </div>
+
+
+</main>
+<script>
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+    crossorigin="anonymous"></script>
+
+<script src="{{url_for('static',filename='/Admin/assets/demo/chart-bar-demo.js')}}"></script>
+<script src="{{url_for('static',filename='/Admin/js/datatables-simple.js')}}"></script>
+
+
+{% endblock %}

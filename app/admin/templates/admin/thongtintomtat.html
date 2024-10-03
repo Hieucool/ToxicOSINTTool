@@ -1,0 +1,61 @@
+{% extends "/admin/layout.html" %}
+{% block title %} Tóm tắt tin tức {% endblock %}
+{% block body %}
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Tóm tắt tin tức</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/User/Index">Dashboard</a></li>
+            <li class="breadcrumb-item active">Tóm tắt tin tức</li>
+        </ol>
+        
+        
+        <form id="classificationForm" action="/admin/summerize" method="post" style="margin-top: 15px;">
+            <div class="input-group mb-3">
+                <textarea class="form-control" name="content" class="form-control" placeholder="Nhập bài báo cần tóm tắt..." rows="10" style="border-radius: 50;">{{pre_data}}</textarea>
+
+            </div>
+
+            <div class="input-group mb-3">
+
+            <select name="numsentence" class="form-select" aria-label="Default select example">
+                <option selected>Lựa chọn độ dài tóm tắt</option>
+                <option value="1">1 Câu</option>
+                <option value="5">5 câu</option>
+                <option value="10">10 câu</option>
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="border-radius: 50;">Tóm tắt</button>
+
+        </form>
+    
+           
+    
+        
+        <div class="mt-4">
+      
+            {%if data %}
+                <div class="card">
+                    <div class="card-body" id="responseData">
+            
+                        {{data}}
+                    
+                    </div>
+                </div>
+                            
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.12/signalr.min.js"></script>
+<script src="/Admin/js/site.js"></script>
+
+
+{% endblock %}

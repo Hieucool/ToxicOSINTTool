@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: bm25
+Version: 1.0
+Summary: BM25 search algorithm
+Requires: pybind11
+License-File: LICENSE
